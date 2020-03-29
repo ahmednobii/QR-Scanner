@@ -60,7 +60,7 @@ textureView.post { startCamera() }
 
 private fun startCamera() {
     val previewConfig = PreviewConfig.Builder().apply {
-        setTargetResolution(Size(640,480))
+      //  setTargetResolution(Size(1080,720))
     }.build()
 
 val preview = Preview(previewConfig)
@@ -108,17 +108,18 @@ CameraX.bindToLifecycle(this , preview ,imageCapture)
 
         private fun updateTransform() {
 val matrix = Matrix()
-            val  centerX = textureView.width/2f
-            val centerY  = textureView.height/2f
+            val  centerX = textureView.width/2F
+            val centerY  = textureView.height/2F
             val rotationDegrees = when(textureView.display.rotation) {
                 Surface.ROTATION_0 -> 0
-                Surface.ROTATION_90 -> 90
+                Surface.ROTATION_90 ->90
                 Surface.ROTATION_180 -> 180
                 Surface.ROTATION_270 -> 270
                 else -> return
             }
-            matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
-
+            matrix.setRotate(rotationDegrees.toFloat())
+            matrix.preRotate(rotationDegrees.toFloat(), centerX.toFloat(), centerY.toFloat())
+//matrix.preRotate(Surface.ROTATION_90.toFloat(), centerX.toFloat() , centerY.toFloat())
             // Finally, apply transformations to our TextureView
             textureView.setTransform(matrix)
 

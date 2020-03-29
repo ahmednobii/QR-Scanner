@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QRCode-Scanner</string>
+    <string name="descript">that is button for capturing photos</string>
 </resources>
